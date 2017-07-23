@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">News</string>
+    <string name="no_news">No news found</string>
+    <string name="no_internet_connection">No internet connection</string>
+    <string name="Introduction">Hi there! Welcome to the News App!  Just type in a search phrase below and press Done on the keyboard. Then press Search.  The app will search for news stories that contain your search phrase. The title of the article, name of the section, and the date published will be displayed. If you are unable to reach the internet, No Internet Connection will appear</string>
+    <string name="searchHint">Enter search phrase</string>
+    <string name="searchButtonTitle">Search</string>
+    <string name="title_activity_news">NewsActivity</string>
+</resources>
