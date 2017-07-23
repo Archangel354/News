@@ -43,6 +43,5 @@ public class MainActivity extends AppCompatActivity {
         Intent mIntent = new Intent(MainActivity.this, NewsActivity.class);
         mIntent.putExtra("urlString", URLstring);
         startActivity(mIntent);
-
     }
 }
