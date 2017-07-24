@@ -6,19 +6,23 @@ package com.example.owner.news;
 
 public class NewsList {
 
-    // title for a particular book
+    // title for a particular news record
     private String mTitle;
 
-    // authors names for a particular book
+    // authors names for a particular news record
     private String mSection;
 
-    // published date for a particular book
+    // published date for a particular news record
     private String mDate;
 
-    public NewsList(String Title, String Authors, String Date) {
+    // The website of the news record
+    private String mUrl;
+
+    public NewsList(String Title, String Authors, String Date, String Url) {
         mSection = Authors;
         mTitle = Title;
         mDate = Date;
+        mUrl = Url;
     }
 
     public String getmSection() {
@@ -32,4 +36,6 @@ public class NewsList {
     public String getmDate() {
         return mDate;
     }
+
+    public String getmUrl() { return mUrl; }
 }

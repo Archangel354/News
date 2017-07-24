@@ -136,6 +136,8 @@ public final class Utils {
         String section = "";
         String date = "";
         String title = "";
+        String url = "";
+        String formattedDate = "";
 
         JSONArray featureArray1 = null;
         JSONObject featureObject2 = null;
@@ -198,6 +200,7 @@ public final class Utils {
                 date = properties.getString("webPublicationDate");
                 if (properties.has("webPublicationDate")) {
                     date  = properties.getString("webPublicationDate");
+                    formattedDate = date.substring(0, 10);
                 }
                 else {
                     date = "No date listed";
@@ -211,9 +214,17 @@ public final class Utils {
                     title = "No title listed";
                 }
 
+                url = properties.getString("webUrl");
+                if (properties.has("webUrl")) {
+                    url  = properties.getString("webUrl");
+                }
+                else {
+                    url = "No URL listed";
+                }
 
 
-                NewsList mNewsList = new NewsList(title, section, date);
+
+                NewsList mNewsList = new NewsList(title, section, formattedDate, url);
                 newsRecords.add(mNewsList);
             }
 
