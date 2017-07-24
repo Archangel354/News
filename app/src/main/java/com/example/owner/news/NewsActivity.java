@@ -8,10 +8,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -27,7 +24,7 @@ public class NewsActivity extends AppCompatActivity  implements LoaderManager.Lo
      * Constant value for the booklist loader ID. We can choose any integer.
      * This really only comes into play if you're using multiple loaders.
      */
-    private static final int BOOKLIST_LOADER_ID = 1;
+    private static final int NEWSLIST_LOADER_ID = 1;
 
     /** Adapter for the list of books */
     private NewsAdapter mAdapter;
@@ -69,10 +66,10 @@ public class NewsActivity extends AppCompatActivity  implements LoaderManager.Lo
                 NewsList currentNews = mAdapter.getItem(position);
 
                 // Convert the String URL into a URI object (to pass into the Intent constructor)
-                Uri earthquakeUri = Uri.parse(currentNews.getmUrl());
+                Uri newsUri = Uri.parse(currentNews.getmUrl());
 
                 // Create a new intent to view the earthquake URI
-                Intent websiteIntent = new Intent(Intent.ACTION_VIEW, earthquakeUri);
+                Intent websiteIntent = new Intent(Intent.ACTION_VIEW, newsUri);
 
                 // Send the intent to launch a new activity
                 startActivity(websiteIntent);
@@ -96,7 +93,7 @@ public class NewsActivity extends AppCompatActivity  implements LoaderManager.Lo
             // Initialize the loader. Pass in the int ID constant defined above and pass in null for
             // the bundle. Pass in this activity for the LoaderCallbacks parameter (which is valid
             // because this activity implements the LoaderCallbacks interface).
-            loaderManager.initLoader(BOOKLIST_LOADER_ID, null, this);
+            loaderManager.initLoader(NEWSLIST_LOADER_ID, null, this);
         } else {
             // Otherwise, display error
             // First, hide loading indicator so error message will be visible
