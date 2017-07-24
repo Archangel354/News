@@ -101,12 +101,12 @@ public class NewsActivity extends AppCompatActivity  implements LoaderManager.Lo
     }
 
     @Override
-    public void onLoadFinished(Loader<List<NewsList>> loader, List<NewsList> books) {
+    public void onLoadFinished(Loader<List<NewsList>> loader, List<NewsList> newsRecords) {
         // Hide loading indicator because the data has been loaded
         View loadingIndicator = findViewById(R.id.loading_indicator);
         loadingIndicator.setVisibility(View.GONE);
-        if (books == null || books.isEmpty()) {
-            // Set empty state text to display "No books found."
+        if (newsRecords == null || newsRecords.isEmpty()) {
+            // Set empty state text to display "No newsRecords found."
             mEmptyStateTextView = (TextView) findViewById(R.id.empty_view);
 
             mEmptyStateTextView.setText(R.string.no_news);
@@ -114,10 +114,10 @@ public class NewsActivity extends AppCompatActivity  implements LoaderManager.Lo
         // Clear the adapter of previous booklist data
         mAdapter.clear();
 
-        // If there is a valid list of books, then add them to the adapter's
+        // If there is a valid list of newsRecords, then add them to the adapter's
         // data set. This will trigger the ListView to update.
-        if (books != null && !books.isEmpty()) {
-            mAdapter.addAll(books);
+        if (newsRecords != null && !newsRecords.isEmpty()) {
+            mAdapter.addAll(newsRecords);
 
         }
     }

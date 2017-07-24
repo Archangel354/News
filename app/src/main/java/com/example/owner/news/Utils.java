@@ -129,27 +129,30 @@ public final class Utils {
 
     /**
      * Return an {@link List} object by parsing out information
-     * about the first earthquake from the input booksJSON string.
+     * about the first news item from the input newsJSON string.
      */
-    private static List extractFeatureFromJson(String booksJSON) {
+    private static List extractFeatureFromJson(String newsJSON) {
 
-
-
-        String title = "";
         String section = "";
-        JSONArray featureArray = null;
+        String date = "";
+        String title = "";
+
+        JSONArray featureArray1 = null;
+        JSONObject featureObject2 = null;
 
 
         // If the JSON string is empty or null, then return early.
-        if (TextUtils.isEmpty(booksJSON)) {
+        if (TextUtils.isEmpty(newsJSON)) {
             return null;
         }
         try {
-            JSONObject baseJsonResponse = new JSONObject(booksJSON);
+            JSONObject baseJsonResponse = new JSONObject(newsJSON);
+            JSONObject getSth = baseJsonResponse.getJSONObject("response");
 
             // Checking if "items" is present
-            if (baseJsonResponse.has("items")) {
-                featureArray = baseJsonResponse.getJSONArray("items");
+            if (getSth.has("results")) {
+               // featureObject2 = baseJsonResponse.getJSONObject("results");
+                featureArray1 = getSth.getJSONArray("results");
             } else
             {
                 // Built placeholder JSON string in case "items" not found
@@ -175,23 +178,16 @@ public final class Utils {
                         " ]\n" +
                         "}";
                 baseJsonResponse = new JSONObject(placeholderJSON);
-                featureArray = baseJsonResponse.getJSONArray("items");
+                featureArray1 = baseJsonResponse.getJSONArray("items");
             }
 
 
 
-            for (int i = 0;i < featureArray.length();i++){
-                JSONObject currentNews = featureArray.getJSONObject(i);
-                JSONObject properties = currentNews.getJSONObject("response");
-                title = properties.getString("title");
+            for (int i = 0;i < featureArray1.length();i++){
+                JSONObject properties = featureArray1.getJSONObject(i);
+                //JSONObject properties = currentNews.getJSONObject("results");
 
-                if (properties.has("title")) {
-                    title = properties.getString("title");
-                }
-                else {
-                    title = "No title listed";
-                }
-
+                section = properties.getString("sectionName");
                 if (properties.has("sectionName")) {
                     section = properties.getString("sectionName");
                 }
@@ -199,14 +195,30 @@ public final class Utils {
                     section = "No section listed";
                 }
 
-                String publishedDate = properties.getString("webPublicationDate");
+                date = properties.getString("webPublicationDate");
+                if (properties.has("webPublicationDate")) {
+                    date  = properties.getString("webPublicationDate");
+                }
+                else {
+                    date = "No date listed";
+                }
 
-                NewsList mNewsList = new NewsList(title, section, publishedDate);
+                title = properties.getString("webTitle");
+                if (properties.has("webTitle")) {
+                    title  = properties.getString("webTitle");
+                }
+                else {
+                    title = "No title listed";
+                }
+
+
+
+                NewsList mNewsList = new NewsList(title, section, date);
                 newsRecords.add(mNewsList);
             }
 
         } catch (JSONException e) {
-            Log.e(LOG_TAG, "Problem parsing the mBookList JSON results", e);
+            Log.e(LOG_TAG, "Problem parsing the mNewsList JSON results", e);
         }
         return newsRecords;
     }
